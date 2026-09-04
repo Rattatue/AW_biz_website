@@ -2,6 +2,22 @@ const PAGE_ID = process.env.FACEBOOK_PAGE_ID || "";
 const ACCESS_TOKEN = process.env.FACEBOOK_PAGE_ACCESS_TOKEN || "";
 const GRAPH_VERSION = process.env.FACEBOOK_GRAPH_VERSION || "";
 
+async function readFacebookPayload(response) {
+  const raw = await response.text();
+
+  if (!raw) {
+    return {};
+  }
+
+  try {
+    return JSON.parse(raw);
+  } catch (error) {
+    return {
+      raw
+    };
+  }
+}
+
 function normalizePost(post) {
   return {
     id: post && post.id ? String(post.id) : "",
@@ -56,7 +72,7 @@ exports.handler = async function handler() {
       }
     });
 
-    const payload = await response.json();
+    const payload = await readFacebookPayload(response);
     const posts = Array.isArray(payload && payload.data)
       ? payload.data.slice(0, 6).map(normalizePost)
       : [];
@@ -71,7 +87,12 @@ exports.handler = async function handler() {
         body: JSON.stringify({
           posts: [],
           source: "facebook-error",
-          error: payload && payload.error ? payload.error.message || "Facebook API error" : "Facebook API error"
+          error:
+            payload && payload.error
+              ? payload.error.message || "Facebook API error"
+              : payload && payload.raw
+                ? payload.raw.slice(0, 300)
+                : "Facebook API error"
         })
       };
     }
@@ -88,6 +109,7 @@ exports.handler = async function handler() {
       })
     };
   } catch (error) {
+    console.error("facebook-posts function failed", error);
     return {
       statusCode: 502,
       headers: {

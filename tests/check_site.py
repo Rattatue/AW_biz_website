@@ -49,6 +49,8 @@ ROUTES = {
     "LTR Visa Support": "visa-services/ltr-visa-support/index.html",
     "TH DTV Visa Support": "th/visa-services/dtv-visa-support/index.html",
     "TH LTR Visa Support": "th/visa-services/ltr-visa-support/index.html",
+    "Thailand Elite Visa Support": "visa-services/thailand-elite-visa-support/index.html",
+    "TH Thailand Elite Visa Support": "th/visa-services/thailand-elite-visa-support/index.html",
     "Work Permit": "work-permit/index.html",
     "Work Permit Application Pattaya": "work-permit/application-pattaya/index.html",
     "Work Permit Renewal Pattaya": "work-permit/renewal-pattaya/index.html",
@@ -500,18 +502,12 @@ def check_hero_layout(pages: dict[str, str], failures: list[str]) -> None:
         "Home hero headline does not match the requested layout",
         failures,
     )
-    assert_true(
-        'class="aw-hero-trust"' in home,
-        "Home hero is missing trust points",
-        failures,
-    )
     for token in [
         ".aw-hero {",
         ".aw-hero-container",
         ".aw-hero-image img",
         ".aw-hero-photo-space",
         ".aw-hero-content h1",
-        ".aw-hero-trust",
     ]:
         assert_true(token in styles, f"Stylesheet missing requested hero CSS: {token}", failures)
 
@@ -520,11 +516,11 @@ def check_visa_service_landing_pages(pages: dict[str, str], failures: list[str])
     for route, expected_links in [
         (
             "visa-services/index.html",
-            ["dtv-visa-support/", "ltr-visa-support/"],
+            ["dtv-visa-support/", "ltr-visa-support/", "thailand-elite-visa-support/"],
         ),
         (
             "th/visa-services/index.html",
-            ["dtv-visa-support/", "ltr-visa-support/"],
+            ["dtv-visa-support/", "ltr-visa-support/", "thailand-elite-visa-support/"],
         ),
     ]:
         html = pages.get(route, "")

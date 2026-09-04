@@ -1898,25 +1898,47 @@ a.aw-btn[href*="line.me"]:focus-visible {
   }
 
   .aw-homepage .aw-hero-image {
-    height: min(66vw, 440px);
+    position: absolute;
+    inset: 0;
+    height: 100%;
+  }
+
+  .aw-homepage .aw-hero-image::after {
+    position: absolute;
+    inset: auto 0 0;
+    z-index: 1;
+    height: 38%;
+    background: linear-gradient(0deg, rgba(8, 42, 58, 0.62), rgba(8, 42, 58, 0));
+    content: "";
+    pointer-events: none;
   }
 
   .aw-homepage .aw-hero-image img {
-    object-position: 34% center;
+    object-position: 20% center;
   }
 
   .aw-homepage .aw-hero-container {
+    position: relative;
+    z-index: 2;
     width: min(100%, calc(100% - 24px));
-    padding: 20px 0 38px;
+    min-height: min(100svh, 720px);
+    padding: 28px 0 32px;
   }
 
   .aw-homepage .aw-hero-content {
-    display: grid;
-    gap: 18px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     width: 100%;
-    padding: 24px 20px 20px;
-    border-radius: 24px;
-    box-shadow: 0 18px 40px rgba(23, 142, 189, 0.1);
+    min-height: calc(min(100svh, 720px) - 60px);
+    padding: 0 18px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    text-align: left;
   }
 
   .aw-homepage .aw-hero-badge {
@@ -1932,16 +1954,21 @@ a.aw-btn[href*="line.me"]:focus-visible {
   }
 
   .aw-homepage .aw-hero-actions {
+    position: absolute;
+    right: 18px;
+    bottom: 0;
+    left: 18px;
+    z-index: 3;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 12px;
     margin-top: 0;
   }
 
   .aw-homepage .aw-btn {
-    min-height: 52px;
-    padding: 0 18px;
-    font-size: 0.96rem;
+    min-height: 48px;
+    padding: 0 14px;
+    font-size: 0.92rem;
   }
 
   .aw-homepage .aw-hero-trust {
@@ -1958,7 +1985,7 @@ a.aw-btn[href*="line.me"]:focus-visible {
 
   .aw-homepage .aw-hero-trust div {
     min-height: 100%;
-    padding: 14px 12px;
+    padding: 11px 10px;
     border: 1px solid rgba(198, 215, 223, 0.72);
     border-radius: 18px;
     background: rgba(255, 255, 255, 0.92);
@@ -1966,11 +1993,11 @@ a.aw-btn[href*="line.me"]:focus-visible {
   }
 
   .aw-homepage .aw-hero-trust strong {
-    font-size: 0.88rem;
+    font-size: 0.82rem;
   }
 
   .aw-homepage .aw-hero-trust span {
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     line-height: 1.4;
   }
 
@@ -2169,7 +2196,7 @@ a.aw-btn[href*="line.me"]:focus-visible {
   }
 
   .aw-homepage .aw-hero-image {
-    height: 260px;
+    height: 100%;
   }
 
   .aw-homepage .aw-hero-container {
@@ -2178,28 +2205,32 @@ a.aw-btn[href*="line.me"]:focus-visible {
   }
 
   .aw-homepage .aw-hero-content {
-    gap: 16px;
-    padding: 20px 16px 16px;
-    border-radius: 22px;
+    min-height: calc(min(100svh, 720px) - 46px);
+    padding: 0 14px;
   }
 
   .aw-homepage .aw-hero-content h1 {
-    font-size: 2rem;
+    font-size: 3.15rem;
     line-height: 1.03;
   }
 
   .aw-homepage .aw-hero-content p {
-    font-size: 0.96rem;
-    line-height: 1.68;
+    font-size: 0.92rem;
+    line-height: 1.58;
   }
 
   .aw-homepage .aw-hero-actions {
     grid-template-columns: 1fr;
+    right: 14px;
+    bottom: 0;
+    left: 14px;
   }
 
   .aw-homepage .aw-btn {
     width: 100%;
-    min-height: 50px;
+    min-height: 42px;
+    padding-inline: 12px;
+    font-size: 0.88rem;
   }
 
   .aw-homepage .aw-hero-trust {
@@ -2207,6 +2238,7 @@ a.aw-btn[href*="line.me"]:focus-visible {
   }
 
   .aw-homepage .aw-hero-trust div {
+    padding: 10px;
     border-right: 1px solid rgba(198, 215, 223, 0.72);
   }
 
